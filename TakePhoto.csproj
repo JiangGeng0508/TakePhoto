@@ -4,9 +4,9 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Scripts\glasses.gdshader" />
-    <Content Include="Scripts\outline.gdshader" />
-    <Content Include="Scripts\pixelize.gdshader" />
+    <Content Include="Scripts\gdshader\glasses.gdshader" />
+    <Content Include="Scripts\gdshader\outline.gdshader" />
+    <Content Include="Scripts\gdshader\pixelize.gdshader" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Scripts\gdshaders\**" />
