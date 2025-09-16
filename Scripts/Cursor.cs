@@ -6,7 +6,7 @@ using TakePhoto.Scripts;
 
 public partial class Cursor : Node2D
 {
-    private List<VampArea> _detectVamps = [];
+    private List<VampArea> _detectVamps = [];//debug
     private Label _nameList;
 
     public override void _Ready()

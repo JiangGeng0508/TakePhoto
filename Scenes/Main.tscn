@@ -95,6 +95,9 @@ texture = ExtResource("2_uu6xs")
 
 [node name="VampArea" parent="VampAreas" instance=ExtResource("4_cm0pq")]
 position = Vector2(801, 131)
+TameStopMode = 2
+TameSpeed = 20.0
+LoseSpeed = 10.0
 
 [node name="VampArea2" parent="VampAreas" instance=ExtResource("4_cm0pq")]
 position = Vector2(458, 147)
