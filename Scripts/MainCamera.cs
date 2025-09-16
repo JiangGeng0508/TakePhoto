@@ -1,5 +1,6 @@
 using Godot;
 using System;
+
 namespace TakePhoto.Scripts
 {
     public partial class MainCamera : Camera2D

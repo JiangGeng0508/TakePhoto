@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://b025urq2er8p2"]
+
+[ext_resource type="PackedScene" uid="uid://fs0nvr4gupjy" path="res://Scenes/VampArea.tscn" id="1_rs0xn"]
+[ext_resource type="Script" uid="uid://ckfdew4q6hvx5" path="res://Scripts/FirstVamp.cs" id="2_ts6u8"]
+[ext_resource type="Texture2D" uid="uid://bnrscem8233ok" path="res://godot_icon.png" id="2_vl6uf"]
+
+[sub_resource type="Animation" id="Animation_ts6u8"]
+resource_name = "1vpAnim"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GodotIcon:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GodotIcon:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+}
+
+[sub_resource type="Animation" id="Animation_dherj"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GodotIcon:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GodotIcon:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dherj"]
+_data = {
+&"1vpAnim": SubResource("Animation_ts6u8"),
+&"RESET": SubResource("Animation_dherj")
+}
+
+[node name="FirstVamp" instance=ExtResource("1_rs0xn")]
+script = ExtResource("2_ts6u8")
+
+[node name="GodotIcon" type="Sprite2D" parent="." index="3"]
+position = Vector2(4, 4)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_vl6uf")
+
+[node name="VampAnim" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_dherj")
+}
+speed_scale = 2.0

@@ -1,43 +1,44 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using TakePhoto.Scripts;
 
-public partial class Cursor : Node2D
+namespace TakePhoto.Scripts
 {
-    private List<VampArea> _detectVamps = [];//debug
-    private Label _nameList;
-
-    public override void _Ready()
+    public partial class Cursor : Node2D
     {
-        _nameList = GetNode<Label>("NameList");
-    }
+        private List<VampArea> _detectVamps = [];
+        private Label _nameList;
 
-    public void OnAreaEntered(Area2D area)
-    {
-        if (area is VampArea vamp)
+        public override void _Ready()
         {
-            _detectVamps.Add(vamp);
-            RefreshNameList();
+            _nameList = GetNode<Label>("NameList");
         }
-    }
 
-    public void OnAreaExited(Area2D area)
-    {
-        if (area is VampArea vamp && _detectVamps.Contains(vamp))
+        public void OnAreaEntered(Area2D area)
         {
-            _detectVamps.Remove(vamp);
-            RefreshNameList();
+            if (area is VampArea vamp)
+            {
+                _detectVamps.Add(vamp);
+                RefreshNameList();
+            }
         }
-    }
 
-    public void RefreshNameList()
-    {
-        _nameList.Text = "";
-        foreach (var vampArea in _detectVamps)
+        public void OnAreaExited(Area2D area)
         {
-            _nameList.Text += $"{vampArea.Name}\n";
+            if (area is VampArea vamp && _detectVamps.Contains(vamp))
+            {
+                _detectVamps.Remove(vamp);
+                RefreshNameList();
+            }
+        }
+
+        public void RefreshNameList()
+        {
+            _nameList.Text = "";
+            foreach (var vampArea in _detectVamps)
+            {
+                _nameList.Text += $"{vampArea.Name}\n";
+            }
         }
     }
 }

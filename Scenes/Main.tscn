@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfammvrh4egxl"]
+[gd_scene load_steps=9 format=3 uid="uid://cfammvrh4egxl"]
 
 [ext_resource type="Script" uid="uid://b8ukx4c3ycemj" path="res://Scripts/Main.cs" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://dja3edyhmyrbd" path="res://Scripts/MainCamera.cs" id="2_cm0pq"]
 [ext_resource type="Script" uid="uid://hwuifbhpbojc" path="res://Scripts/Cursor.cs" id="2_fos0i"]
 [ext_resource type="Texture2D" uid="uid://dskls0akrsnj" path="res://icon.svg" id="2_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://fs0nvr4gupjy" path="res://Scenes/VampArea.tscn" id="4_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://b025urq2er8p2" path="res://Scenes/FirstVamp.tscn" id="6_v1gob"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_glv2v"]
 viewport_path = NodePath("Phone")
@@ -107,6 +108,13 @@ position = Vector2(567, 431)
 
 [node name="VampArea4" parent="VampAreas" instance=ExtResource("4_cm0pq")]
 position = Vector2(995, 316)
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(390, 561)
+texture = ExtResource("2_uu6xs")
+
+[node name="FirstVamp" parent="." instance=ExtResource("6_v1gob")]
+position = Vector2(910.605, 482.203)
 
 [connection signal="pressed" from="HUD/ScreenShot" to="." method="TakeScreenShot"]
 [connection signal="area_entered" from="Cursor/CursorArea" to="Cursor" method="OnAreaEntered"]
