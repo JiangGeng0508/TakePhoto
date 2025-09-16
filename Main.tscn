@@ -1,18 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfammvrh4egxl"]
+[gd_scene load_steps=4 format=3 uid="uid://cfammvrh4egxl"]
 
 [ext_resource type="Script" uid="uid://b8ukx4c3ycemj" path="res://Scripts/Main.cs" id="1_glv2v"]
+[ext_resource type="Texture2D" uid="uid://dskls0akrsnj" path="res://icon.svg" id="2_uu6xs"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_glv2v"]
+viewport_path = NodePath("Phone")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_glv2v")
 
-[node name="Button" type="Button" parent="."]
-offset_left = 1024.0
-offset_top = 22.0
-offset_right = 1120.0
-offset_bottom = 77.0
-text = "ScreenShot"
+[node name="Phone" type="SubViewport" parent="."]
+
+[node name="PhoneCamera" type="Camera2D" parent="Phone"]
+
+[node name="Cursor" type="Node2D" parent="."]
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Cursor"]
+remote_path = NodePath("../../Phone/PhoneCamera")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 721.0
+offset_top = 404.0
+offset_right = 1057.0
+offset_bottom = 657.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+
+[node name="PhoneFace" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(76, 74)
+scale = Vector2(0.365234, 0.365234)
+texture = SubResource("ViewportTexture_glv2v")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(576, 324)
 
-[connection signal="pressed" from="Button" to="." method="TakeScreenShot"]
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(540, 303)
+scale = Vector2(6.10938, 1.42188)
+texture = ExtResource("2_uu6xs")
+
+[node name="ScreenShot" type="Button" parent="."]
+offset_left = 1044.0
+offset_top = 13.0
+offset_right = 1140.0
+offset_bottom = 44.0
+text = "ScreenShot"
+
+[node name="Album" type="Sprite2D" parent="."]
+position = Vector2(373, 490)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_uu6xs")
+
+[connection signal="pressed" from="ScreenShot" to="." method="TakeScreenShot"]
