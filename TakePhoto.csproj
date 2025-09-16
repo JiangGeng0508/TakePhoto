@@ -8,4 +8,12 @@
     <Content Include="Scripts\outline.gdshader" />
     <Content Include="Scripts\pixelize.gdshader" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Scripts\gdshaders\**" />
+    <Compile Remove="gdshaders\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Scripts\gdshaders\**" />
+    <EmbeddedResource Remove="gdshaders\**" />
+  </ItemGroup>
 </Project>

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfammvrh4egxl"]
+[gd_scene load_steps=8 format=3 uid="uid://cfammvrh4egxl"]
 
 [ext_resource type="Script" uid="uid://b8ukx4c3ycemj" path="res://Scripts/Main.cs" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://dja3edyhmyrbd" path="res://Scripts/MainCamera.cs" id="2_cm0pq"]
+[ext_resource type="Script" uid="uid://hwuifbhpbojc" path="res://Scripts/Cursor.cs" id="2_fos0i"]
 [ext_resource type="Texture2D" uid="uid://dskls0akrsnj" path="res://icon.svg" id="2_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://fs0nvr4gupjy" path="res://Scenes/VampArea.tscn" id="4_cm0pq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm0pq"]
 size = Vector2(128, 128)
@@ -17,15 +19,18 @@ script = ExtResource("1_glv2v")
 size = Vector2i(128, 128)
 
 [node name="PhoneCamera" type="Camera2D" parent="Phone"]
+position = Vector2(24, 12)
 
 [node name="Cursor" type="Node2D" parent="."]
+position = Vector2(24, 12)
+script = ExtResource("2_fos0i")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Cursor"]
 remote_path = NodePath("../../Phone/PhoneCamera")
 
-[node name="Area2D" type="Area2D" parent="Cursor"]
+[node name="CursorArea" type="Area2D" parent="Cursor"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor/CursorArea"]
 shape = SubResource("RectangleShape2D_cm0pq")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Cursor"]
@@ -35,6 +40,12 @@ offset_top = -64.0
 offset_right = 64.5
 offset_bottom = 64.5
 editor_only = false
+
+[node name="NameList" type="Label" parent="Cursor"]
+offset_left = 65.0
+offset_top = -64.0
+offset_right = 132.0
+offset_bottom = 64.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_left = 778.0
@@ -70,5 +81,8 @@ text = "ScreenShot"
 [node name="Album" type="Sprite2D" parent="."]
 position = Vector2(178, 521)
 texture = ExtResource("2_uu6xs")
+
+[node name="VampArea" parent="." instance=ExtResource("4_cm0pq")]
+position = Vector2(818, 129)
 
 [connection signal="pressed" from="ScreenShot" to="." method="TakeScreenShot"]

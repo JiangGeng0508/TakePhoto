@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://fs0nvr4gupjy"]
+
+[ext_resource type="Script" uid="uid://3stpkel530fq" path="res://Scripts/VampArea.cs" id="1_8cfcp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g17xv"]
+
+[node name="VampArea" type="Area2D" groups=["VampArea"]]
+script = ExtResource("1_8cfcp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g17xv")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
