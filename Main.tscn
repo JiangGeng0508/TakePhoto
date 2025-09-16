@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfammvrh4egxl"]
+[gd_scene load_steps=7 format=3 uid="uid://cfammvrh4egxl"]
 
 [ext_resource type="Script" uid="uid://b8ukx4c3ycemj" path="res://Scripts/Main.cs" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://dja3edyhmyrbd" path="res://Scripts/MainCamera.cs" id="2_cm0pq"]
 [ext_resource type="Texture2D" uid="uid://dskls0akrsnj" path="res://icon.svg" id="2_uu6xs"]
+[ext_resource type="Script" uid="uid://xploieemq61q" path="res://Scripts/TrackPoint.cs" id="3_r0du0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm0pq"]
+size = Vector2(128, 128)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_glv2v"]
 viewport_path = NodePath("Phone")
@@ -10,6 +15,7 @@ viewport_path = NodePath("Phone")
 script = ExtResource("1_glv2v")
 
 [node name="Phone" type="SubViewport" parent="."]
+size = Vector2i(128, 128)
 
 [node name="PhoneCamera" type="Camera2D" parent="Phone"]
 
@@ -18,21 +24,36 @@ script = ExtResource("1_glv2v")
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Cursor"]
 remote_path = NodePath("../../Phone/PhoneCamera")
 
+[node name="Area2D" type="Area2D" parent="Cursor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor/Area2D"]
+shape = SubResource("RectangleShape2D_cm0pq")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Cursor"]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.5
+offset_bottom = 64.5
+editor_only = false
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_left = 721.0
-offset_top = 404.0
-offset_right = 1057.0
-offset_bottom = 657.0
+offset_left = 778.0
+offset_top = 449.0
+offset_right = 906.0
+offset_bottom = 577.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(128, 128)
+render_target_update_mode = 4
 
 [node name="PhoneFace" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
-position = Vector2(76, 74)
-scale = Vector2(0.365234, 0.365234)
+position = Vector2(64, 64)
 texture = SubResource("ViewportTexture_glv2v")
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2(576, 324)
+script = ExtResource("2_cm0pq")
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(540, 303)
@@ -47,8 +68,11 @@ offset_bottom = 44.0
 text = "ScreenShot"
 
 [node name="Album" type="Sprite2D" parent="."]
-position = Vector2(373, 490)
-scale = Vector2(0.25, 0.25)
+position = Vector2(178, 521)
 texture = ExtResource("2_uu6xs")
+
+[node name="TrackPoint" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(583, 81)
+script = ExtResource("3_r0du0")
 
 [connection signal="pressed" from="ScreenShot" to="." method="TakeScreenShot"]
