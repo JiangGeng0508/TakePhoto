@@ -3,4 +3,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Scripts\glasses.gdshader" />
+    <Content Include="Scripts\outline.gdshader" />
+    <Content Include="Scripts\pixelize.gdshader" />
+  </ItemGroup>
 </Project>
