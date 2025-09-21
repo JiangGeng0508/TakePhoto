@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqy2b0pk84djx"]
+
+[ext_resource type="Script" uid="uid://b8ukx4c3ycemj" path="res://Scripts/Capture.cs" id="1_4kxot"]
+[ext_resource type="Script" uid="uid://hwuifbhpbojc" path="res://Scripts/Cursor.cs" id="2_rjkyk"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tygu8"]
+viewport_path = NodePath("Capture/Phone")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccsx5"]
+size = Vector2(1, 1)
+
+[node name="Capture" type="Node2D"]
+script = ExtResource("1_4kxot")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
+offset_right = 128.0
+offset_bottom = 128.0
+metadata/_edit_group_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(128, 128)
+render_target_update_mode = 0
+
+[node name="PhoneFace" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(64, 64)
+texture = SubResource("ViewportTexture_tygu8")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="SubViewportContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+editor_only = false
+
+[node name="Phone" type="SubViewport" parent="."]
+size = Vector2i(128, 128)
+
+[node name="PhoneCamera" type="Camera2D" parent="Phone"]
+
+[node name="Cursor" type="Node2D" parent="."]
+z_index = 100
+script = ExtResource("2_rjkyk")
+metadata/_edit_group_ = true
+
+[node name="CursorArea" type="Area2D" parent="Cursor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor/CursorArea"]
+shape = SubResource("RectangleShape2D_ccsx5")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Cursor"]
+z_index = 1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.5
+offset_bottom = 64.5
+editor_only = false
+
+[node name="NameList" type="Label" parent="Cursor"]
+offset_left = 65.0
+offset_top = -64.0
+offset_right = 132.0
+offset_bottom = 64.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Cursor"]
+remote_path = NodePath("../../Phone/PhoneCamera")
+
+[connection signal="area_entered" from="Cursor/CursorArea" to="Cursor" method="OnAreaEntered"]
+[connection signal="area_exited" from="Cursor/CursorArea" to="Cursor" method="OnAreaExited"]

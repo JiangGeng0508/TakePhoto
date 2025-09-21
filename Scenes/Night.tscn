@@ -1,7 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cegepq2mdu7al"]
+[gd_scene load_steps=9 format=3 uid="uid://cegepq2mdu7al"]
 
 [ext_resource type="Shader" uid="uid://dealhd6bf3eui" path="res://Scripts/gdshader/spotlight.gdshader" id="1_v2myn"]
 [ext_resource type="Script" uid="uid://b3ittxpruf8ou" path="res://Scripts/Darkness.cs" id="2_v2myn"]
+[ext_resource type="Script" uid="uid://b8ukx4c3ycemj" path="res://Scripts/Capture.cs" id="3_kjauf"]
+[ext_resource type="Script" uid="uid://hwuifbhpbojc" path="res://Scripts/Cursor.cs" id="4_vix0x"]
+[ext_resource type="PackedScene" uid="uid://b025urq2er8p2" path="res://Scenes/FirstVamp.tscn" id="5_vix0x"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tygu8"]
+viewport_path = NodePath("Capture/Phone")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccsx5"]
+size = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v2myn"]
 shader = ExtResource("1_v2myn")
@@ -13,9 +22,72 @@ shader_parameter/screen_height = 1080.0
 
 [node name="Night" type="Node2D"]
 
+[node name="Capture" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_kjauf")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Capture"]
+visible = false
+offset_right = 128.0
+offset_bottom = 128.0
+metadata/_edit_group_ = true
+
+[node name="SubViewport" type="SubViewport" parent="Capture/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(128, 128)
+render_target_update_mode = 0
+
+[node name="PhoneFace" type="Sprite2D" parent="Capture/SubViewportContainer/SubViewport"]
+position = Vector2(64, 64)
+texture = SubResource("ViewportTexture_tygu8")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Capture/SubViewportContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+editor_only = false
+
+[node name="Phone" type="SubViewport" parent="Capture"]
+size = Vector2i(128, 128)
+
+[node name="PhoneCamera" type="Camera2D" parent="Capture/Phone"]
+
+[node name="Cursor" type="Node2D" parent="Capture"]
+z_index = 100
+script = ExtResource("4_vix0x")
+metadata/_edit_group_ = true
+
+[node name="CursorArea" type="Area2D" parent="Capture/Cursor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Capture/Cursor/CursorArea"]
+shape = SubResource("RectangleShape2D_ccsx5")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Capture/Cursor"]
+z_index = 1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.5
+offset_bottom = 64.5
+editor_only = false
+
+[node name="NameList" type="Label" parent="Capture/Cursor"]
+offset_left = 65.0
+offset_top = -64.0
+offset_right = 132.0
+offset_bottom = 64.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Capture/Cursor"]
+remote_path = NodePath("../../Phone/PhoneCamera")
+
 [node name="Darkness" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_v2myn")
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("2_v2myn")
+
+[node name="FirstVamp" parent="." instance=ExtResource("5_vix0x")]
+position = Vector2(345.44818, 223.94049)
+
+[connection signal="area_entered" from="Capture/Cursor/CursorArea" to="Capture/Cursor" method="OnAreaEntered"]
+[connection signal="area_exited" from="Capture/Cursor/CursorArea" to="Capture/Cursor" method="OnAreaExited"]

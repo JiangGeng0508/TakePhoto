@@ -13,6 +13,9 @@ public partial class Darkness : ColorRect
 
         _shaderMaterial.SetShaderParameter("screen_width", GetViewportRect().Size.X);
         _shaderMaterial.SetShaderParameter("screen_height", GetViewportRect().Size.Y);
+
+        SetZIndex(1000);
+        Show();
     }
 
     public override void _PhysicsProcess(double delta)

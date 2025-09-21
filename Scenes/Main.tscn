@@ -29,10 +29,10 @@ unique_name_in_owner = true
 script = ExtResource("1_v1gob")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Capture"]
-offset_left = 711.0
-offset_top = 514.0
-offset_right = 839.0
-offset_bottom = 642.0
+offset_left = 702.0
+offset_top = 512.0
+offset_right = 830.0
+offset_bottom = 640.0
 metadata/_edit_group_ = true
 
 [node name="SubViewport" type="SubViewport" parent="Capture/SubViewportContainer"]
@@ -130,7 +130,7 @@ texture = ExtResource("2_uu6xs")
 position = Vector2(910.605, 482.203)
 
 [node name="Album" parent="." instance=ExtResource("7_jw32o")]
-position = Vector2(159, 537)
+position = Vector2(164, 497)
 
 [connection signal="area_entered" from="Capture/Cursor/CursorArea" to="Capture/Cursor" method="OnAreaEntered"]
 [connection signal="area_exited" from="Capture/Cursor/CursorArea" to="Capture/Cursor" method="OnAreaExited"]
