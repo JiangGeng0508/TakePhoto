@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpdlhi5im6pcp"]
+
+[ext_resource type="Texture2D" uid="uid://dskls0akrsnj" path="res://icon.svg" id="1_76aax"]
+[ext_resource type="Script" uid="uid://dvvyvekmtx8to" path="res://Scripts/Album.cs" id="1_708fa"]
+
+[node name="Album" type="Sprite2D"]
+texture = ExtResource("1_76aax")
+offset = Vector2(64, 64)
+script = ExtResource("1_708fa")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+offset_right = 128.0
+offset_bottom = 128.0
+editor_only = false
