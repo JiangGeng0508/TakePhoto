@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.5.0">
+<Project Sdk="Godot.NET.Sdk/4.4.1">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -7,7 +7,6 @@
     <Content Include="Scripts\gdshader\glasses.gdshader" />
     <Content Include="Scripts\gdshader\outline.gdshader" />
     <Content Include="Scripts\gdshader\pixelize.gdshader" />
-    <Content Include="Scripts\gdshader\spotlight.gdshader" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Scripts\gdshaders\**" />

@@ -10,8 +10,8 @@ namespace TakePhoto.Scripts
         
         public override void _Ready()
         {
-            _cursor = GetNode<Node2D>("Cursor");
-            _phone = GetNode<SubViewport>("Phone");
+            _cursor = GetNode<Node2D>("Capture/Cursor");
+            _phone = GetNode<SubViewport>("Capture/Phone");
 
             _phone.World2D = GetTree().Root.World2D;
         }

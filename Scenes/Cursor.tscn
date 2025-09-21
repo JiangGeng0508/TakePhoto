@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv4dbu00owq5y"]
+
+[ext_resource type="Script" uid="uid://hwuifbhpbojc" path="res://Scripts/Cursor.cs" id="1_ri6lo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbw6q"]
+size = Vector2(1, 1)
+
+[node name="Cursor" type="Node2D"]
+z_index = 100
+script = ExtResource("1_ri6lo")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../../Phone/PhoneCamera")
+
+[node name="CursorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CursorArea"]
+shape = SubResource("RectangleShape2D_pbw6q")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+z_index = 1
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.5
+offset_bottom = 64.5
+editor_only = false
+
+[node name="NameList" type="Label" parent="."]
+offset_left = 65.0
+offset_top = -64.0
+offset_right = 132.0
+offset_bottom = 64.0
+
+[connection signal="area_entered" from="CursorArea" to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="CursorArea" to="." method="OnAreaExited"]

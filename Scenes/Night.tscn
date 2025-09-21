@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cegepq2mdu7al"]
+
+[ext_resource type="Shader" uid="uid://dealhd6bf3eui" path="res://Scripts/gdshader/spotlight.gdshader" id="1_v2myn"]
+[ext_resource type="Script" uid="uid://b3ittxpruf8ou" path="res://Scripts/Darkness.cs" id="2_v2myn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2myn"]
+shader = ExtResource("1_v2myn")
+shader_parameter/circle_size = 0.15
+shader_parameter/feather = 0.05
+shader_parameter/circle_position = Vector2(0.5, 0.5)
+shader_parameter/screen_width = 1920.0
+shader_parameter/screen_height = 1080.0
+
+[node name="Night" type="Node2D"]
+
+[node name="Darkness" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_v2myn")
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_v2myn")
